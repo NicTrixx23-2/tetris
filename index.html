@@ -107,7 +107,7 @@
             matrix.forEach((row, y) => {
                 row.forEach((value, x) => {
                     if (value !== 0) {
-                        ctx.fillStyle = 'red';
+                        ctx.fillStyle = colors[value];
                         ctx.fillRect(x + offset.x, y + offset.y, 1, 1);
                     }
                 });
@@ -115,9 +115,6 @@
         }
 
         function draw() {
-            context.fillStyle = '#000';
-            context.fillRect(0, 0, canvas.width, canvas.height);
-
             drawMatrix(arena, { x: 0, y: 0 }, context);
             drawMatrix(player.matrix, player.pos, context);
             drawMatrix(player.next, { x: 0, y: 0 }, nextContext);
@@ -204,6 +201,17 @@
             document.getElementById('score').innerText = player.score;
         }
 
+        const colors = [
+            null,
+            'red',
+            'blue',
+            'violet',
+            'green',
+            'purple',
+            'orange',
+            'pink'
+        ];
+
         let dropCounter = 0;
         let dropInterval = 1000;
         let lastTime = 0;
@@ -230,18 +238,6 @@
                 playerDrop();
             } else if (event.key === 'ArrowUp' || event.key === 'w') {
                 playerRotate();
-            }
-        });
-
-        document.addEventListener('keyup', event => {
-            if (event.key === 'ArrowDown' || event.key === 's') {
-                dropInterval = 1000;
-            }
-        });
-
-        document.addEventListener('keydown', event => {
-            if (event.key === 'ArrowDown' || event.key === 's') {
-                dropInterval = 50;
             }
         });
 
