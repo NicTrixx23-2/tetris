@@ -114,15 +114,11 @@
             return matrix;
         }
 
-        function drawMatrix(matrix, offset, ctx, highlightBottom = false) {
+        function drawMatrix(matrix, offset, ctx) {
             matrix.forEach((row, y) => {
                 row.forEach((value, x) => {
                     if (value !== 0) {
-                        if (highlightBottom && y === matrix.length - 1) {
-                            ctx.fillStyle = '#FFFFFF'; // Color the bottom square white
-                        } else {
-                            ctx.fillStyle = colors[value];
-                        }
+                        ctx.fillStyle = colors[value];
                         ctx.fillRect(x + offset.x, y + offset.y, 1, 1);
                         ctx.strokeStyle = 'white';
                         ctx.lineWidth = 0.05;
@@ -137,7 +133,7 @@
             nextContext.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
 
             drawMatrix(arena, { x: 0, y: 0 }, context);
-            drawMatrix(player.matrix, player.pos, context, true); // Highlight bottom row
+            drawMatrix(player.matrix, player.pos, context);
             drawMatrix(player.next, { x: 1, y: 1 }, nextContext);
         }
 
