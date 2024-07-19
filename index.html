@@ -118,7 +118,11 @@
             matrix.forEach((row, y) => {
                 row.forEach((value, x) => {
                     if (value !== 0) {
-                        ctx.fillStyle = colors[value];
+                        if (y === matrix.length - 1) {
+                            ctx.fillStyle = '#FFFFFF'; // color the bottom row white
+                        } else {
+                            ctx.fillStyle = colors[value];
+                        }
                         ctx.fillRect(x + offset.x, y + offset.y, 1, 1);
                         ctx.strokeStyle = 'white';
                         ctx.lineWidth = 0.05;
