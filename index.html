@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <button onclick="window.location.href='https://nictrixx23-2.github.io/games-hub';">Back to Game Hub</button>
     <title>Tetris Game</title>
     <style>
-        body { display: flex; justify-content: center; align-items: flex-start; height: 100vh; margin: 0; background: #000; color: white; font-family: Arial, sans-serif; }
-        canvas { background: #111; display: block; }
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #222; color: white; font-family: Arial, sans-serif; }
+        canvas { background: #333; display: block; }
         #info { margin-left: 20px; }
+        #game-container { display: flex; }
     </style>
 </head>
 <body>
-    <div>
-        <canvas id="tetris" width="320" height="640"></canvas>
-        <canvas id="next" width="160" height="160"></canvas>
-    </div>
-    <div id="info">
-        <div>Score: <span id="score">0</span></div>
+    <div id="game-container">
+        <div>
+            <canvas id="tetris" width="240" height="480"></canvas>
+            <canvas id="next" width="80" height="80"></canvas>
+        </div>
+        <div id="info">
+            <div>Score: <span id="score">0</span></div>
+        </div>
     </div>
     <script>
         const canvas = document.getElementById('tetris');
@@ -31,13 +33,13 @@
 
         const colors = [
             null,
-            'red',
-            'blue',
-            'violet',
-            'green',
-            'purple',
-            'orange',
-            'pink'
+            '#FF5733', // red
+            '#33FF57', // green
+            '#5733FF', // blue
+            '#FFFF33', // yellow
+            '#33FFFF', // cyan
+            '#FF33FF', // magenta
+            '#FFA500'  // orange
         ];
 
         function arenaSweep() {
@@ -118,6 +120,9 @@
                     if (value !== 0) {
                         ctx.fillStyle = colors[value];
                         ctx.fillRect(x + offset.x, y + offset.y, 1, 1);
+                        ctx.strokeStyle = 'white';
+                        ctx.lineWidth = 0.05;
+                        ctx.strokeRect(x + offset.x, y + offset.y, 1, 1);
                     }
                 });
             });
